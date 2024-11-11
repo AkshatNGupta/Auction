@@ -30,7 +30,7 @@ public class Auction {
         this.seller = seller;
         this.isClosed = false;
         this.bids = new ArrayList<>();
-        this.participants = new HashSet<>();
+        this.participants = new HashSet<>();//this was missing
     }
 
     public String getId() {
@@ -89,14 +89,14 @@ public class Auction {
 
         if (uniqueBids.isEmpty()) return null;
 
-        int highestUniqueBid = uniqueBids.get(0);
+        int highestUniqueBid = uniqueBids.getFirst();
         List<Bid> highestBidders = bidMap.get(highestUniqueBid);
 
         List<Bid> preferredBidders = highestBidders.stream()
                 .filter(bid -> bid.getBuyer().isPreferred())
                 .collect(Collectors.toList());
 
-        return preferredBidders.isEmpty() ? highestBidders.get(0) : preferredBidders.get(0);
+        return preferredBidders.isEmpty() ? highestBidders.getFirst() : preferredBidders.getFirst();
     }
 
 
